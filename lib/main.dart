@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'clipper_vs_painter/clipper_and_painter.dart';
 import 'clock.dart';
+import 'live_demo.dart';
 import 'path_painters/path_example.dart';
 import 'widgets/button.dart';
 
@@ -58,6 +59,10 @@ class _MyHomePageState extends State<MyHomePage> {
             Button(
               title: "Clock",
               page: ClockPage(),
+            ),
+            Button(
+              title: "Live",
+              page: LiveDemo(),
             ),
           ],
         ),
