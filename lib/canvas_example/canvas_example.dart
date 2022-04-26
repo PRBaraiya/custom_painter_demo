@@ -29,6 +29,7 @@ class _CanvasExampleState extends State<CanvasExample> {
         targetHeight: _imageHeight.toInt(),
         targetWidth: _imageWidth.toInt(),
       );
+
       final result = (await codec.getNextFrame()).image;
       codec.dispose();
       if (mounted) setState(() => image = result);
@@ -143,7 +144,7 @@ class CanvasPainter extends CustomPainter {
     if (image != null) {
       final offset = Offset(150, 320);
 
-      canvas.drawImage(image!, offset, Paint());
+      canvas.drawImage(image!, offset, Paint()..invertColors = true);
     }
 
     // Add two different ways to draw text in PPT.

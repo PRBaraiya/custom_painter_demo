@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 class LiveDemo extends StatefulWidget {
@@ -6,6 +8,23 @@ class LiveDemo extends StatefulWidget {
 }
 
 class _LiveDemoState extends State<LiveDemo> {
+  ValueNotifier<double> offset = ValueNotifier(0);
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    // _timer = Timer.periodic(Duration(milliseconds: 50), (timer) {
+    //   offset.value += 0.1;
+    // });
+  }
+
+  @override
+  void dispose() {
+    // _timer?.cancel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,13 +36,13 @@ class _LiveDemoState extends State<LiveDemo> {
                 size: Size(MediaQuery.of(context).size.width,
                     MediaQuery.of(context).size.height - 100),
                 painter: Grids(),
+                foregroundPainter: CustomDemo(offset: offset),
               ),
             ),
-            ElevatedButton(
-              onPressed: () {
-                // TODO: Move...
-              },
-              child: Text("Move"),
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [],
             ),
           ],
         ),
@@ -32,14 +51,23 @@ class _LiveDemoState extends State<LiveDemo> {
   }
 }
 
-class DemoPainter extends CustomPainter {
+class CustomDemo extends CustomPainter {
+  final ValueNotifier offset;
+
+  CustomDemo({required this.offset}) : super(repaint: offset);
+
   @override
   void paint(Canvas canvas, Size size) {
-    // TODO: implement paint
+    final paint = Paint();
+    paint.color = Colors.green;
+    paint.style = PaintingStyle.stroke;
+    paint.strokeWidth = 10;
+
+    canvas.drawRect(Rect.fromLTWH(50, 50, 100, 100), paint);
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
 
 class Grids extends CustomPainter {

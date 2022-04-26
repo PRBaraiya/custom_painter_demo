@@ -112,6 +112,7 @@ class ClockPainter extends CustomPainter {
 
     var minHandX = centerX + 80 * cos(dateTime.minute * 6 * pi / 180);
     var minHandY = centerX + 80 * sin(dateTime.minute * 6 * pi / 180);
+
     canvas.drawLine(center, Offset(minHandX, minHandY), minHandBrush);
 
     var secHandX = centerX + 80 * cos(dateTime.second * 6 * pi / 180);
